@@ -11,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.33.0",
+  "imports": {
+    "#/*": "./src/*",
+    "#generated/*": "./generated/*"
+  },
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.7.0",
     "@prisma/client": "^7.7.0",
