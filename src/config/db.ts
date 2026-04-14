@@ -11,3 +11,4 @@ const adapter = new PrismaMariaDb({
 });
 
 export const prisma = new PrismaClient({ adapter });
+export default prisma;
