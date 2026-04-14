@@ -29,7 +29,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error("❌ Error durante el seeding:", e);
+    console.error("Error durante el seeding:", e);
     process.exit(1);
   })
   .finally(async () => {

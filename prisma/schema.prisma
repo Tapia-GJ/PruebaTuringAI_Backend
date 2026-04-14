@@ -24,7 +24,7 @@ model User{
   roleId Int
   role Role @relation(fields: [roleId], references: [id])
 
-  favorites Work[] @relation("UserFavorites") //relacion muchos a muchos
+  favorites UserFavorite[] //relacion muchos a muchos
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,7 +51,7 @@ model Author{
 model Genre{
   id Int @id @default(autoincrement())
   name String
-  works Work[] @relation("WorkGenres")
+  workGenres WorkGenre[]
   @@map("genres")
 }
 // obras
@@ -65,13 +65,36 @@ model Work{
   authorId Int
   author Author @relation(fields: [authorId],references: [id])
 
-  genres Genre[]  @relation("WorkGenres")
-  favoritedBy User[]   @relation("UserFavorites")
+  workGenres WorkGenre[]
+  favoritedBy UserFavorite[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   @@map("works")
 }
+model WorkGenre {
+  workId  Int
+  work    Work  @relation(fields: [workId], references: [id], onDelete: Cascade)
+  
+  genreId Int
+  genre   Genre @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@id([workId, genreId]) // Llave primaria compuesta
+  @@map("work_genres")
+}
+
+// muchos a muchos
+model UserFavorite {
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workId Int
+  work   Work @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@id([userId, workId]) // Llave primaria compuesta
+  @@map("user_favorites")
+}
+
 model Session {
   id        String   @id
   expiresAt DateTime
