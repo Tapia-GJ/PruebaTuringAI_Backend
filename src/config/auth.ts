@@ -4,6 +4,8 @@ import { prisma } from "./db.js";
 import bcrypt from "bcrypt";
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  trustedOrigins: ["http://localhost:5173"],
   database: prismaAdapter(prisma, {
     provider: "mysql", // or "mariadb" if better-auth supports it, mysql is standard for prisma
   }),
