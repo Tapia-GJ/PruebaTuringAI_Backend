@@ -17,7 +17,7 @@ const router: Router = Router();
  *         title:
  *           type: string
  *           description: Título del cómic
- *         descripction:
+ *         description:
  *           type: string
  *           description: Descripción o sinopsis
  *         coverUrl:
@@ -33,7 +33,7 @@ const router: Router = Router();
  *           description: ID del autor
  *       example:
  *         title: "Spider-Man"
- *         descripction: "Un cómic clásico"
+ *         description: "Un cómic clásico"
  *         coverUrl: "http://imagen.com/spider.png"
  *         publishYear: 2002
  *         authorId: 1

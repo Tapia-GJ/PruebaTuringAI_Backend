@@ -124,7 +124,7 @@ async function main() {
     where: { id: 1 }, // Usamos ID 1 como identificador
     update: {
       title: "DC K.O.",
-      descripction:
+      description:
         "DC no se anda con rodeos este otoño con DC K.O., un nuevo y masivo evento de cómics de los afamados escritores Joshua Williamson y Scott Snyder, que arranca en octubre. Imagina un torneo cósmico de alto riesgo donde héroes y villanos se lanzan a batallas de gladiadores en una colosal arena erigida en la Tierra, con cada nivel más brutal y simbólico que el anterior. ¿El objetivo? Generar suficiente Energía Omega para desafiar a un Darkseid casi divino y coronar a un nuevo Rey Omega.",
       coverUrl:
         "https://marmota.me/wp-content/uploads/2025/10/DC-K.O.-2025-001-001-1-999x1536.jpg",
@@ -134,7 +134,7 @@ async function main() {
     create: {
       id: 1,
       title: "DC K.O.",
-      descripction:
+      description:
         "DC no se anda con rodeos este otoño con DC K.O., un nuevo y masivo evento de cómics de los afamados escritores Joshua Williamson y Scott Snyder, que arranca en octubre. Imagina un torneo cósmico de alto riesgo donde héroes y villanos se lanzan a batallas de gladiadores en una colosal arena erigida en la Tierra, con cada nivel más brutal y simbólico que el anterior. ¿El objetivo? Generar suficiente Energía Omega para desafiar a un Darkseid casi divino y coronar a un nuevo Rey Omega.",
       coverUrl:
         "https://marmota.me/wp-content/uploads/2025/10/DC-K.O.-2025-001-001-1-999x1536.jpg",

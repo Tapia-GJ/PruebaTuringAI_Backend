@@ -58,7 +58,7 @@ model Genre{
 model Work{
   id Int @id @default(autoincrement())
   title String
-  descripction String
+  description String
   coverUrl String?
   publishYear Int?
 
