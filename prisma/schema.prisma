@@ -17,11 +17,11 @@ model Role {
 }
 
 model User{
-  id Int @id @default(autoincrement())
+  id String @id @default(cuid())
   name String? 
   email String @unique 
-  password String 
-  roleId Int
+  password String? 
+  roleId Int @default(1)
   role Role @relation(fields: [roleId], references: [id])
 
   favorites UserFavorite[] //relacion muchos a muchos
@@ -85,7 +85,7 @@ model WorkGenre {
 
 // muchos a muchos
 model UserFavorite {
-  userId Int
+  userId String
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   workId Int
@@ -103,7 +103,7 @@ model Session {
   updatedAt DateTime @updatedAt
   ipAddress String?  @db.Text
   userAgent String?  @db.Text
-  userId    Int
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
@@ -114,7 +114,7 @@ model Account {
   id                    String    @id
   accountId             String    @db.Text
   providerId            String    @db.Text
-  userId                Int
+  userId                String
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?   @db.Text
   refreshToken          String?   @db.Text
