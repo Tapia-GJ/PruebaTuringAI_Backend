@@ -8,6 +8,7 @@ export class WorkController {
       const works = await WorkService.getAll();
       res.json(works);
     } catch (error) {
+      console.error("Error in getAll:", error);
       res.status(500).json({ error: "Error al obtener los cómics" });
     }
   }
@@ -25,6 +26,7 @@ export class WorkController {
 
       res.json(work);
     } catch (error) {
+      console.error("Error in getById:", error);
       res.status(500).json({ error: "Error al obtener el cómic" });
     }
   }

@@ -4,9 +4,13 @@ export class WorkService {
   static async getAll() {
     return prisma.work.findMany({
       include: {
-        //traer datos de otras tablas relacionadas
+        // traer datos de otras tablas relacionadas
         author: true,
-        genres: true,
+        workGenres: {
+          include: {
+            genre: true,
+          }
+        },
       },
     });
   }
@@ -14,7 +18,14 @@ export class WorkService {
   static async getById(id: number) {
     return prisma.work.findUnique({
       where: { id },
-      include: { author: true, genres: true },
+      include: { 
+        author: true, 
+        workGenres: {
+          include: {
+            genre: true,
+          }
+        },
+      },
     });
   }
 
