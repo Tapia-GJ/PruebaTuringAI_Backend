@@ -62,6 +62,27 @@ router.get("/", isAuthenticated, WorkController.getAll);
 
 /**
  * @swagger
+ * /api/works/latest:
+ *   get:
+ *     summary: Obtiene los últimos 3 cómics agregados
+ *     tags: [Works]
+ *     description: Endpoint público para obtener los 3 cómics más recientes
+ *     responses:
+ *       200:
+ *         description: Lista de los últimos 3 cómics obtenida con éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Work'
+ *       500:
+ *         description: Error al obtener los cómics
+ */
+router.get("/latest", WorkController.getLatest);
+
+/**
+ * @swagger
  * /api/works/{id}:
  *   get:
  *     summary: Obtiene un cómic por ID

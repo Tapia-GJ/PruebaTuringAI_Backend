@@ -78,4 +78,19 @@ export class WorkService {
       where: { id },
     });
   }
+
+  static async getLatest(take: number = 3) {
+    return prisma.work.findMany({
+      orderBy: { createdAt: 'desc' },
+      take,
+      include: {
+        author: true,
+        workGenres: {
+          include: {
+            genre: true,
+          }
+        },
+      },
+    });
+  }
 }

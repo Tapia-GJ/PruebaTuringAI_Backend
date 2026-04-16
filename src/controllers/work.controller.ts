@@ -84,4 +84,14 @@ export class WorkController {
       res.status(500).json({ error: "Error al eliminar el cómic" });
     }
   }
+
+  static async getLatest(req: Request, res: Response) {
+    try {
+      const works = await WorkService.getLatest(3);
+      res.json(works);
+    } catch (error) {
+      console.error("Error in getLatest:", error);
+      res.status(500).json({ error: "Error al obtener los últimos cómics" });
+    }
+  }
 }
