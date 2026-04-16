@@ -6,7 +6,7 @@ const options = {
     info: {
       title: "API de Cómics (Turing AI)",
       version: "1.0.0",
-      description: "Documentación de los endpoints del backend para el CRUD de Works y roles de usuario.",
+      description: "Documentación de los endpoints del backend",
     },
     servers: [
       {
@@ -20,7 +20,8 @@ const options = {
           type: "apiKey",
           in: "cookie",
           name: "better-auth.session_token", // Cookie generada por Better Auth
-          description: "La cookie de sesión generada automáticamente al hacer login"
+          description:
+            "La cookie de sesión generada automáticamente al hacer login",
         },
       },
     },

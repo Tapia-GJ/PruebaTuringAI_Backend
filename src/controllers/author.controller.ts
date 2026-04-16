@@ -1,18 +1,20 @@
+import {
+  createAuthorSchema,
+  updateAuthorSchema,
+} from "../schemas/author.schema.js";
+import { AuthorService } from "./../services/author.service.js";
 import type { Request, Response } from "express";
-import { WorkService } from "../services/work.service.js";
-import { createWorkSchema, updateWorkSchema } from "../schemas/work.schema.js";
 
-export class WorkController {
+export class AuthorController {
   static async getAll(req: Request, res: Response) {
     try {
-      const works = await WorkService.getAll();
-      res.json(works);
+      const authors = await AuthorService.getAll();
+      res.json(authors);
     } catch (error) {
       console.error("Error in getAll:", error);
-      res.status(500).json({ error: "Error al obtener los cómics" });
+      res.status(500).json({ error: "Error al obtener los autores" });
     }
   }
-
   static async getById(req: Request, res: Response) {
     try {
       const idParam = Array.isArray(req.params.id)
@@ -21,35 +23,29 @@ export class WorkController {
       const id = parseInt(idParam || "");
       if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
 
-      const work = await WorkService.getById(id);
-      if (!work) return res.status(404).json({ error: "Cómic no encontrado" });
+      const author = await AuthorService.getById(id);
+      if (!author)
+        return res.status(404).json({ error: "Autor no encontrado" });
 
-      res.json(work);
+      res.json(author);
     } catch (error) {
       console.error("Error in getById:", error);
-      res.status(500).json({ error: "Error al obtener el cómic" });
+      res.status(500).json({ error: "Error al obtener el autor" });
     }
   }
-
   static async create(req: Request, res: Response) {
     try {
-      const validation = createWorkSchema.safeParse(req.body);
+      const validation = createAuthorSchema.safeParse(req.body);
       if (!validation.success) {
         return res.status(400).json({ errors: validation.error.format() });
       }
 
-      const newWork = await WorkService.create(validation.data);
-
-      res.status(201).json(newWork);
+      const newAuthor = await AuthorService.create(validation.data);
+      res.status(201).json(newAuthor);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        error:
-          "Error al crear el cómic. Verifica que el authorId exista. y el generoId exista",
-      });
+      res.status(500).json({ error: "Error al crear el autor" });
     }
   }
-
   static async update(req: Request, res: Response) {
     try {
       const idParam = Array.isArray(req.params.id)
@@ -58,18 +54,17 @@ export class WorkController {
       const id = parseInt(idParam || "");
       if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
 
-      const validation = updateWorkSchema.safeParse(req.body);
+      const validation = updateAuthorSchema.safeParse(req.body);
       if (!validation.success) {
         return res.status(400).json({ errors: validation.error.format() });
       }
 
-      const updatedWork = await WorkService.update(id, validation.data);
-      res.json(updatedWork);
+      const updatedAuthor = await AuthorService.update(id, validation.data);
+      res.json(updatedAuthor);
     } catch (error) {
-      res.status(500).json({ error: "Error al actualizar el cómic" });
+      res.status(500).json({ error: "Error al actualizar el autor" });
     }
   }
-
   static async delete(req: Request, res: Response) {
     try {
       const idParam = Array.isArray(req.params.id)
@@ -78,10 +73,10 @@ export class WorkController {
       const id = parseInt(idParam || "");
       if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
 
-      await WorkService.delete(id);
+      await AuthorService.delete(id);
       res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: "Error al eliminar el cómic" });
+      res.status(500).json({ error: "Error al eliminar el autor" });
     }
   }
 }
