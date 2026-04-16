@@ -6,6 +6,7 @@ export const createWorkSchema = z.object({
   coverUrl: z.string().url("Debe ser una URL válida").optional(),
   publishYear: z.number().int().optional(),
   authorId: z.number().int().positive("El ID del autor es obligatorio"),
+  genreIds: z.array(z.number().int().positive()).optional(),
 });
 
 export const updateWorkSchema = createWorkSchema.partial();

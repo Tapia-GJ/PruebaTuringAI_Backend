@@ -30,15 +30,46 @@ export class WorkService {
   }
 
   static async create(data: any) {
+    const { genreIds, ...workData } = data;
+    
     return prisma.work.create({
-      data,
+      data: {
+        ...workData,
+        ...(genreIds && genreIds.length > 0 ? {
+          workGenres: {
+            create: genreIds.map((id: number) => ({
+              genre: { connect: { id } }
+            }))
+          }
+        } : {})
+      },
+      include: {
+        author: true,
+        workGenres: { include: { genre: true } }
+      }
     });
   }
 
   static async update(id: number, data: any) {
+    const { genreIds, ...workData } = data;
+
     return prisma.work.update({
       where: { id },
-      data,
+      data: {
+        ...workData,
+        ...(genreIds !== undefined ? {
+          workGenres: {
+            deleteMany: {}, // Limpiamos los géneros anteriores
+            create: genreIds.map((gId: number) => ({
+              genre: { connect: { id: gId } }
+            }))
+          }
+        } : {})
+      },
+      include: {
+        author: true,
+        workGenres: { include: { genre: true } }
+      }
     });
   }
 
